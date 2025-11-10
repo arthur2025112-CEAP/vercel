@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Números - Matemágica 7</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to bottom, #e3f2fd, #ffffff); color: #333; }
+    header { background: linear-gradient(135deg, #2196f3, #3f51b5); color: white; padding: 2.5rem; text-align: center; }
+    header h1 { font-size: 2.5rem; }
+    nav { background: #2c3e50; padding: 1rem; text-align: center; }
+    nav a { color: white; margin: 0 1rem; text-decoration: none; font-weight: bold; padding: 0.6rem 1rem; border-radius: 30px; background: #34495e; display: inline-block; transition: 0.3s; }
+    nav a:hover { background: #f39c12; transform: scale(1.1); }
+    main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    .card { background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .card:hover { transform: translateY(-5px); }
+    .card h2 { color: #2196f3; border-bottom: 3px solid #3f51b5; padding-bottom: 0.5rem; }
+    .exemplo { background: #e3f2fd; padding: 1.5rem; border-left: 6px solid #2196f3; border-radius: 8px; margin: 1rem 0; }
+    .video-btn, .img-btn { background: #4caf50; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; margin: 0.5rem; transition: 0.3s; }
+    .video-btn:hover, .img-btn:hover { background: #388e3c; transform: scale(1.05); }
+    .quiz { background: #fff3e0; padding: 1rem; border-radius: 10px; margin: 1rem 0; }
+    input[type="number"] { padding: 0.5rem; margin: 0.5rem; }
+    footer { background: #2c3e50; color: white; text-align: center; padding: 1.5rem; }
+    @media (max-width: 600px) { nav a { display: block; margin: 0.5rem auto; width: 80%; } }
+  </style>
+  <script>
+    function checkQuiz() { let ans = document.getElementById('quiz-input').value; alert(ans == 1.25 ? 'Correto! 🎉 5/4 = 1,25' : 'Tente de novo! Dica: MMC de 4 e 2 é 4.'); }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>🔢 Números</h1>
+    <p>Do básico ao avançado: inteiros, racionais, operações e mais!</p>
+  </header>
+  <nav>
+    <a href="index.html">🏠 Início</a>
+    <a href="geometria.html">📐 Geometria</a>
+    <a href="grandezas.html">📏 Grandezas</a>
+    <a href="estatistica.html">📊 Estatística</a>
+    <a href="saiba_mais.html">ℹ️ Saiba Mais</a>
+  </nav>
+  <main>
+    <div class="card">
+      <h2>Conteúdos Detalhados (BNCC EF07MA01 a EF07MA06)</h2>
+      <p><strong>Números Inteiros:</strong> Incluem positivos, negativos e zero (ex.: -5, 0, 10). Operações: Soma/subtração (regra do sinal), multiplicação/divisão (sinal do resultado depende do número de negativos).</p>
+      <ul>
+        <li><strong>Racionais:</strong> Frações (ex.: 3/4 = parte/todo), decimais (0,75) e dízimas (0,333... = 1/3). Frações equivalentes: Multiplique/divida numerador e denominador pelo mesmo número ≠0.</li>
+        <li><strong>Operações com Racionais:</strong> Soma/subtração: MMC dos denominadores. Multiplicação: Numeradores × numeradores, denominadores × denominadores. Divisão: Multiplique pelo inverso.</li>
+        <li><strong>Potenciação:</strong> Base^expoente (2³=8). Expoentes negativos: 2^{-1}=1/2.</li>
+        <li><strong>Radiciação:</strong> √ (raiz quadrada): √9=3. Propriedade: √(a×b)=√a × √b.</li>
+        <li><strong>MMC/MDC:</strong> MMC para somas de frações; MDC para simplificar (ex.: MDC(12,18)=6).</li>
+      </ul>
+      <div class="exemplo">
+        <p><strong>Exemplo Resolvido:</strong> Some 3/4 + 1/2.</p>
+        <p>1. MMC(4,2)=4 → 1/2=2/4.</p>
+        <p>2. 3/4 + 2/4 = 5/4.</p>
+        <p>3. Decimal: 5÷4=1,25.</p>
+      </div>
+      <button class="img-btn" onclick="window.open('https://pixabay.com/photos/fractions-math-education-school-5801602/&#39;, '_blank')">Ver Imagem de Frações 📸</button>
+      <button class="video-btn" onclick="window.open('https://pt.khanacademy.org/math/cc-sixth-grade-math/x0267d782:cc-6th-fractions-decimals/cc-6th-fractions-as-division/v/fraction-decimals-connection&#39;, '_blank')">Assistir Vídeo Khan: Frações para Decimais 🎥</button>
+      <div class="quiz">
+        <p><strong>Quiz Rápido:</strong> Qual é 3/4 + 1/2? <input type="number" id="quiz-input" step="0.01"> <button onclick="checkQuiz()">Verificar! 🧠</button></p>
+      </div>
+      <p><strong>Dica de Estudo:</strong> Pratique com reta numérica para visuais! Baixe PDF grátis: <a href="https://mundoeducacao.uol.com.br/matematica/fracao.htm&quot; target="_blank">Mundo Educação - Frações</a>.</p>
+    </div>
+  </main>
+  <footer>© 2025 Matemágica 7 – Números são o portal da magia! ✨</footer>
+</body>
+</html>
