@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo Mágico - Matemágica 7</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to bottom, #f3e7e9, #ffffff); color: #333; }
+    header { background: linear-gradient(135deg, #ff6f61, #d81b60); color: white; padding: 2.5rem; text-align: center; }
+    header h1 { font-size: 2.5rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    nav { background: #2c3e50; padding: 1rem; text-align: center; }
+    nav a { color: white; margin: 0 1rem; text-decoration: none; font-weight: bold; padding: 0.6rem 1rem; border-radius: 30px; background: #34495e; display: inline-block; transition: 0.3s; }
+    nav a:hover { background: #f39c12; transform: scale(1.1); }
+    main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    .card { background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .card:hover { transform: translateY(-5px); }
+    .card h2 { color: #ff6f61; border-bottom: 3px solid #d81b60; padding-bottom: 0.5rem; }
+    .game-area { background: linear-gradient(135deg, #fce4ec, #fff3e0); padding: 1.5rem; border-radius: 10px; text-align: center; }
+    .question { font-size: 1.3rem; font-weight: bold; margin-bottom: 1rem; }
+    .options button { background: #2196f3; color: white; padding: 0.8rem; margin: 0.5rem; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: 0.3s; width: 100%; max-width: 300px; }
+    .options button:hover { background: #1976d2; transform: scale(1.05); }
+    .feedback { margin-top: 1rem; font-size: 1.2rem; min-height: 2.5rem; }
+    .score { font-size: 1.5rem; font-weight: bold; color: #d81b60; margin-top: 1rem; }
+    .category-btn { background: #ff9800; color: white; padding: 0.7rem 1.2rem; margin: 0.5rem; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+    .category-btn:hover { background: #f57c00; transform: scale(1.05); }
+    .progress { margin: 1rem 0; font-size: 1.1rem; color: #555; }
+    footer { background: #2c3e50; color: white; text-align: center; padding: 1.5rem; }
+    @media (max-width: 600px) { nav a { display: block; margin: 0.5rem auto; width: 80%; } .question { font-size: 1.1rem; } }
+  </style>
+  <script>
+    // Banco de perguntas (mais de 20 para variedade!)
+    const allQuestions = [
+      // Números (8)
+      { category: "Números", text: "3/4 + 1/2 = ?", options: ["1,25", "1,5", "1", "0,75"], correct: 0, explanation: "MMC(4,2)=4 → 3/4 + 2/4 = 5/4 = 1,25" },
+      { category: "Números", text: "(-3)² = ?", options: ["-9", "9", "6", "-6"], correct: 1, explanation: "(-3)×(-3)=9" },
+      { category: "Números", text: "√16 = ?", options: ["4", "8", "2", "16"], correct: 0, explanation: "4×4=16" },
+      { category: "Números", text: "MMC de 6 e 8?", options: ["24", "48", "12", "2"], correct: 0, explanation: "Mínimo múltiplo comum: 24" },
+      { category: "Números", text: "2³ = ?", options: ["6", "8", "9", "16"], correct: 1, explanation: "2×2×2=8" },
+      { category: "Números", text: "1/3 em decimal?", options: ["0,3", "0,33...", "0,25", "0,5"], correct: 1, explanation: "Dízima periódica: 0,333..." },
+      { category: "Números", text: "(-5) + 3 = ?", options: ["-8", "-2", "2", "8"], correct: 1, explanation: "-5 + 3 = -2" },
+      { category: "Números", text: "MDC de 12 e 18?", options: ["6", "3", "2", "36"], correct: 0, explanation: "Maior divisor comum: 6" },
+
+      // Geometria (6)
+      { category: "Geometria", text: "Área do triângulo: base=6, altura=4?", options: ["12 cm²", "24 cm²", "10 cm²", "15 cm²"], correct: 0, explanation: "(6×4)/2 = 12" },
+      { category: "Geometria", text: "Soma dos ângulos do triângulo?", options: ["180°", "360°", "90°", "120°"], correct: 0, explanation: "Sempre 180°" },
+      { category: "Geometria", text: "Perímetro do quadrado de lado 5?", options: ["20", "25", "10", "15"], correct: 0, explanation: "4×5=20" },
+      { category: "Geometria", text: "Área do círculo (r=7, π≈3,14)?", options: ["153,86", "43,96", "21,98", "28"], correct: 0, explanation: "π×7² ≈ 153,86" },
+      { category: "Geometria", text: "Quantos lados tem um hexágono?", options: ["6", "5", "8", "4"], correct: 0, explanation: "Hexa = 6" },
+      { category: "Geometria", text: "Ângulo reto mede?", options: ["90°", "180°", "45°", "60°"], correct: 0, explanation: "Exatamente 90°" },
+
+      // Grandezas (6)
+      { category: "Grandezas", text: "R$200 com 15% off?", options: ["R$170", "R$185", "R$150", "R$180"], correct: 0, explanation: "200×0,15=30 → 200-30=170" },
+      { category: "Grandezas", text: "1,5 km = ? metros", options: ["1500 m", "150 m", "15 m", "15000 m"], correct: 0, explanation: "1,5×1000=1500" },
+      { category: "Grandezas", text: "3 horas = ? minutos", options: ["180", "120", "60", "300"], correct: 0, explanation: "3×60=180" },
+      { category: "Grandezas", text: "Regra de três: 2 kg → R$10, 5 kg → ?", options: ["R$25", "R$20", "R$15", "R$30"], correct: 0, explanation: "10/2 = x/5 → x=25" },
+      { category: "Grandezas", text: "20% de 50?", options: ["10", "15", "20", "25"], correct: 0, explanation: "50×0,2=10" },
+      { category: "Grandezas", text: "1 litro = ? ml", options: ["1000 ml", "100 ml", "10 ml", "10000 ml"], correct: 0, explanation: "1 L = 1000 ml" },
+
+      // Estatística (6)
+      { category: "Estatística", text: "Média de 7, 8, 6, 9?", options: ["7,5", "7", "8", "30"], correct: 0, explanation: "(7+8+6+9)/4=30/4=7,5" },
+      { category: "Estatística", text: "Probabilidade de cara na moeda?", options: ["1/2", "1/4", "1/3", "1"], correct: 0, explanation: "2 resultados → 1/2" },
+      { category: "Estatística", text: "Gráfico de pizza mostra?", options: ["Partes do todo", "Evolução no tempo", "Comparação de barras", "Relação entre variáveis"], correct: 0, explanation: "Percentuais do total" },
+      { category: "Estatística", text: "Moda de: 2, 3, 3, 4?", options: ["3", "2", "4", "12"], correct: 0, explanation: "Valor que mais aparece" },
+      { category: "Estatística", text: "Probabilidade de tirar 6 no dado?", options: ["1/6", "1/2", "1/3", "1"], correct: 0, explanation: "6 faces → 1/6" },
+      { category: "Estatística", text: "Média de 10, 20, 30?", options: ["20", "60", "15", "10"], correct: 0, explanation: "(10+20+30)/3=60/3=20" }
+    ];
+
+    let score = 0;
+    let currentQuestion = 0;
+    let selectedQuestions = [];
+    let selectedCategory = null;
+
+    // Função para embaralhar array (Fisher-Yates)
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function startGame(category) {
+      selectedCategory = category;
+      score = 0;
+      currentQuestion = 0;
+
+      // Filtra perguntas
+      let pool = category === 'Todas' ? allQuestions : allQuestions.filter(q => q.category === category);
+     
+      // Embaralha e pega apenas 5
+      selectedQuestions = shuffle([...pool]).slice(0, 5);
+
+      document.getElementById('category-selection').style.display = 'none';
+      document.getElementById('game').style.display = 'block';
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      if (currentQuestion >= selectedQuestions.length) {
+        const maxScore = selectedQuestions.length * 10;
+        const percentage = (score / maxScore) * 100;
+        let message = "";
+        if (percentage >= 90) message = "Mestre Supremo da Matemática! 10/10";
+        else if (percentage >= 70) message = "Excelente! Você domina!";
+        else if (percentage >= 50) message = "Muito bom! Continue assim!";
+        else message = "Boa tentativa! Estude mais e volte!";
+
+        document.getElementById('game').innerHTML = `
+          <h3>Fim do Jogo! Fim do Jogo!</h3>
+          <p class="score">Pontuação: ${score} / ${maxScore}</p>
+          <p style="font-size:1.3rem; color:#d81b60; font-weight:bold;">${message}</p>
+          <button class="category-btn" onclick="location.reload()" style="margin-top:1rem;">Jogar Novamente</button>
+        `;
+        return;
+      }
+
+      const q = selectedQuestions[currentQuestion];
+      document.getElementById('game').innerHTML = `
+        <div class="progress">Pergunta ${currentQuestion + 1} de ${selectedQuestions.length}</div>
+        <div class="question">${q.text}</div>
+        <div class="options">
+          ${q.options.map((opt, i) => `
+            <button onclick="checkAnswer(${i})">${opt}</button>
+          `).join('')}
+        </div>
+        <div class="score">Pontuação: ${score}</div>
+        <div class="feedback" id="feedback"></div>
+      `;
+    }
+
+    function checkAnswer(index) {
+      const q = selectedQuestions[currentQuestion];
+      const feedback = document.getElementById('feedback');
+      const buttons = document.querySelectorAll('.options button');
+
+      // Desabilita botões
+      buttons.forEach(b => b.disabled = true);
+
+      if (index === q.correct) {
+        score += 10;
+        feedback.innerHTML = `<span style="color:#4caf50">Correto! ${q.explanation}</span>`;
+        buttons[index].style.background = '#4caf50';
+      } else {
+        feedback.innerHTML = `<span style="color:#d32f2f">Errado! ${q.explanation}</span>`;
+        buttons[index].style.background = '#e53935';
+        buttons[q.correct].style.background = '#4caf50';
+      }
+
+      setTimeout(() => {
+        currentQuestion++;
+        loadQuestion();
+      }, 2500);
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Jogo Mágico</h1>
+    <p>Perguntas aleatórias toda vez! Nunca é igual!</p>
+  </header>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="numeros.html">Números</a>
+    <a href="geometria.html">Geometria</a>
+    <a href="grandezas.html">Grandezas</a>
+    <a href="estatistica.html">Estatística</a>
+    <a href="saiba_mais.html">Saiba Mais</a>
+  </nav>
+  <main>
+    <div class="card">
+      <h2>Desafio Aleatório!</h2>
+      <p>Cada jogo é único! 5 perguntas sorteadas aleatoriamente da categoria.</p>
+      <div id="category-selection" class="game-area">
+        <button class="category-btn" onclick="startGame('Números')">Números</button>
+        <button class="category-btn" onclick="startGame('Geometria')">Geometria</button>
+        <button class="category-btn" onclick="startGame('Grandezas')">Grandezas</button>
+        <button class="category-btn" onclick="startGame('Estatística')">Estatística</button>
+        <button class="category-btn" onclick="startGame('Todas')">Todas (Mix!)</button>
+      </div>
+      <div id="game" class="game-area" style="display:none;"></div>
+    </div>
+  </main>
+  <footer>© 2025 Matemágica 7 – Jogo com perguntas 100% aleatórias!</footer>
+</body>
+</html>
