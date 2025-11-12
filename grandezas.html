@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geometria - Matemágica 7</title>
+  <title>Grandezas - Matemágica 7</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to bottom, #e8f5e8, #ffffff); color: #333; }
-    header { background: linear-gradient(135deg, #4caf50, #388e3c); color: white; padding: 2.5rem; text-align: center; }
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to bottom, #f1f8e9, #ffffff); color: #333; }
+    header { background: linear-gradient(135deg, #cddc39, #827717); color: white; padding: 2.5rem; text-align: center; }
     header h1 { font-size: 2.5rem; }
     nav { background: #2c3e50; padding: 1rem; text-align: center; }
     nav a { color: white; margin: 0 1rem; text-decoration: none; font-weight: bold; padding: 0.6rem 1rem; border-radius: 30px; background: #34495e; display: inline-block; transition: 0.3s; }
@@ -15,54 +15,54 @@
     main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
     .card { background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
     .card:hover { transform: translateY(-5px); }
-    .card h2 { color: #4caf50; border-bottom: 3px solid #388e3c; padding-bottom: 0.5rem; }
-    .exemplo { background: #e8f5e8; padding: 1.5rem; border-left: 6px solid #4caf50; border-radius: 8px; margin: 1rem 0; }
-    .video-btn, .img-btn { background: #ff9800; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; margin: 0.5rem; transition: 0.3s; }
-    .video-btn:hover, .img-btn:hover { background: #f57c00; transform: scale(1.05); }
+    .card h2 { color: #cddc39; border-bottom: 3px solid #827717; padding-bottom: 0.5rem; }
+    .exemplo { background: #f1f8e9; padding: 1.5rem; border-left: 6px solid #cddc39; border-radius: 8px; margin: 1rem 0; }
+    .video-btn, .img-btn { background: #ff5722; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; margin: 0.5rem; transition: 0.3s; }
+    .video-btn:hover, .img-btn:hover { background: #d84315; transform: scale(1.05); }
     .quiz { background: #fff3e0; padding: 1rem; border-radius: 10px; margin: 1rem 0; }
     input[type="number"] { padding: 0.5rem; margin: 0.5rem; }
     footer { background: #2c3e50; color: white; text-align: center; padding: 1.5rem; }
   </style>
   <script>
-    function checkQuiz() { let ans = document.getElementById('quiz-input').value; alert(ans == 12 ? 'Perfeito! Área = 12 cm²' : 'Quase! Fórmula: (base × altura)/2'); }
+    function checkQuiz() { let ans = document.getElementById('quiz-input').value; alert(ans == 170 ? 'Exato! Desconto de 15% em 200 = 30, final 170.' : 'Revise: % = (parte/todo)×100'); }
   </script>
 </head>
 <body>
   <header>
-    <h1>📐 Geometria</h1>
-    <p>Figuras, ângulos e medidas – transforme o mundo em formas!</p>
+    <h1>📏 Grandezas e Medidas</h1>
+    <p>Proporções, porcentagens e conversões – meça o mundo!</p>
   </header>
   <nav>
     <a href="index.html">🏠 Início</a>
     <a href="numeros.html">🔢 Números</a>
-    <a href="grandezas.html">📏 Grandezas</a>
+    <a href="geometria.html">📐 Geometria</a>
     <a href="estatistica.html">📊 Estatística</a>
     <a href="saiba_mais.html">ℹ️ Saiba Mais</a>
   </nav>
   <main>
     <div class="card">
-      <h2>Conteúdos Detalhados (BNCC EF07MA15 a EF07MA20)</h2>
-      <p><strong>Figuras Planas:</strong> Triângulos (3 lados: equilátero=3 iguais, isósceles=2, escaleno=0); Quadriláteros (4 lados: quadrado=4 iguais/perp., retângulo=opostos iguais, trapézio=1 par paralelo).</p>
+      <h2>Conteúdos Detalhados (BNCC EF07MA10 a EF07MA14)</h2>
+      <p><strong>Proporcionalidade:</strong> Direta (aumenta junto, ex.: mais tempo=mais distância); Inversa (um sobe, outro desce, ex.: mais velocidade=menos tempo).</p>
       <ul>
-        <li><strong>Perímetro:</strong> Soma dos lados (P triângulo = a+b+c; P retângulo = 2(compr+alt)).</li>
-        <li><strong>Área:</strong> Triângulo: (base×altura)/2; Retângulo: compr×alt; Círculo: πr² (π≈3,14).</li>
-        <li><strong>Ângulos:</strong> Agudo<90°, reto=90°, obtuso>90°<180°. Soma triângulo=180°.</li>
-        <li><strong>Construções:</strong> Régua/compasso para bisectriz, perpendicular.</li>
-        <li><strong>Simetria/Congruência:</strong> Eixo simetria (ex.: retângulo); Congruentes se lados/ângulos iguais.</li>
+        <li><strong>Razão/Proporção:</strong> Razão=a/b; Proporção: a/b = c/d → a×d = b×c.</li>
+        <li><strong>Regra de Três Simples:</strong> Direta: x = (a×d)/b; Inversa: x = (a×b)/d.</li>
+        <li><strong>Porcentagem:</strong> % = (parte/total)×100. Aumento: +%; Desconto: -%.</li>
+        <li><strong>Unidades:</strong> Comprimento (km→m: ×1000), Massa (kg→g: ×1000), Tempo (h→min: ×60).</li>
+        <li><strong>Conversão:</strong> Use fatores (1m=100cm).</li>
       </ul>
       <div class="exemplo">
-        <p><strong>Exemplo Resolvido:</strong> Área triângulo base=6cm, altura=4cm.</p>
-        <p>1. Fórmula: A = (b × h) / 2.</p>
-        <p>2. A = (6 × 4) / 2 = 24 / 2 = 12 cm².</p>
+        <p><strong>Exemplo Resolvido:</strong> R$200 com 15% desconto.</p>
+        <p>1. Desconto = 200 × (15/100) = 30.</p>
+        <p>2. Final = 200 - 30 = 170 R$.</p>
       </div>
-      <button class="img-btn" onclick="window.open('https://pixabay.com/illustrations/triangle-geometry-math-shape-160583/&#39;, '_blank')">Ver Imagens de Triângulos 📸</button>
-      <button class="video-btn" onclick="window.open('https://www.youtube.com/watch?v=P9Zft_1RQKU&#39;, '_blank')">Vídeo: Formas Geométricas para Crianças 🎥</button>
+      <button class="img-btn" onclick="window.open('https://pixabay.com/illustrations/proportion-math-ratio-scale-5801603/&#39;, '_blank')">Imagem de Proporção 📸</button>
+      <button class="video-btn" onclick="window.open('https://www.youtube.com/watch?v=example-regra-tres-manual&#39;, '_blank')">Vídeo Manual do Mundo: Regra de Três (busque no YT) 🎥</button> <!-- Nota: Substitua por link real se encontrar -->
       <div class="quiz">
-        <p><strong>Quiz:</strong> Área de triângulo (b=6, h=4)? <input type="number" id="quiz-input"> <button onclick="checkQuiz()">Calcular! 🔍</button></p>
+        <p><strong>Quiz:</strong> 200 com 15% off? <input type="number" id="quiz-input"> <button onclick="checkQuiz()">Calcular! 💰</button></p>
       </div>
-      <p><strong>Dica:</strong> Desenhe no papel! PDF grátis: <a href="https://sme.goiania.go.gov.br/conexaoescola/eaja/matematica-geometria-triangulos-e-quadrilateros/&quot; target="_blank">Conexão Escola - Triângulos</a>.</p>
+      <p><strong>Dica:</strong> Use na vida real, como compras! PDF: <a href="https://proenem.com.br/enem/matematica/razao-e-proporcao-e-regra-de-tres/&quot; target="_blank">ProEnem - Razão e Proporção</a>.</p>
     </div>
   </main>
-  <footer>© 2025 Matemágica 7 – Geometria: onde as formas ganham vida! 🌿</footer>
+  <footer>© 2025 Matemágica 7 – Medidas: o ritmo da vida! 📐</footer>
 </body>
 </html>
